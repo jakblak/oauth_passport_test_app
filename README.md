@@ -1,0 +1,1 @@
+- Enabled google+ and contacts API's

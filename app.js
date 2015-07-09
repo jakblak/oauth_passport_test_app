@@ -6,11 +6,22 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
+var secrets = require('./secrets');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+passport.use(new GoogleStrategy({
+    clientId: secrets.ID,
+    clientSecret: secrets.secret,
+    callbackURL: 'https://localhost:3000/auth/google/callback',
+    function(req, accessToken, refreshToken, profile, done) {
+        done(null, profile);
+    }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,11 +42,11 @@ app.use(session({
 app.use(passport.initialize);
 app.use(passport.session());
 
-passport.serializeuser(function(user, done) {
+passport.serializeUser(function(user, done) {
     done(null, user)
 });
 
-passport.deserializeuser(function(user, done) {
+passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 
