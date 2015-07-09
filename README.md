@@ -1,1 +1,2 @@
 - Enabled google+ and contacts API's
+- use OAuth2 scopes to access info via array
