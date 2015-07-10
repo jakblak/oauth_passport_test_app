@@ -10,7 +10,7 @@ var router = express.Router();
 // });
 
 /* GET users listing. */
-router.get('/user', function(req, res) {
+router.get('/', function(req, res) {
   res.render('users', {
     user: {
       name: req.user.displayName,
