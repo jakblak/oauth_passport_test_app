@@ -5,12 +5,21 @@ var router = express.Router();
 router.route('/google/callback')
   .get(passport.authenticate('google', {
     successRedirect: '/users/',
-    failure: '/error'
+    failure: '/error/'
   }));
 
 router.route('/google')
   .get(passport.authenticate('google', {
     scope: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
   }));
+
+router.route('/twitter/callback')
+  .get(passport.authenticate('twitter', {
+    successRedirect: '/users/',
+    failure: '/error/'
+  }));
+
+router.route('/twitter')
+  .get(passport.authenticate('twitter'));
 
 module.exports = router;
