@@ -13,8 +13,9 @@ var router = express.Router();
 router.get('/', function(req, res) {
   res.render('users', {
     user: {
-      name: req.user.displayName,
-      image: req.user.image
+      user: req.user
+      // name: req.user.displayName,
+      // image: req.user.image
     }
   });
 });

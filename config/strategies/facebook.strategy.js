@@ -11,11 +11,37 @@ module.exports = function() {
       passReqToCallback: true
     },
     function(req, accessToken, refreshToken, profile, done) {
-      var user = {};
-      var query = {
-        'facebook.id': profile.id
-      };
-      User.findOne(query, function(error, user) {
+      if (req.user) {
+        console.log('User exists');
+        var query = {};
+        if (req.user.google) {
+          console.log('google');
+          var query = {
+            'google.id': req.user.google.id
+          };
+        } else if (req.user.twitter) {
+          var query = {
+            'twitter.id': req.user.twitter.id
+          };
+        }
+        User.findOne(query, function(err, user) {
+          if (user) {
+            user.facebook = {};
+            user.facebook.id = profile.id;
+            user.facebook.token = accessToken;
+
+            user.save();
+            done(null, user);
+          }
+        });
+
+      } else {
+
+        var user = {};
+        var query = {
+          'facebook.id': profile.id
+        };
+        User.findOne(query, function(error, user) {
           if (user) {
             console.log('found');
             done(null, user);
@@ -33,6 +59,7 @@ module.exports = function() {
             user.save();
             done(null, user);
           }
-      });
-  }));
+        });
+      }
+    }));
 }
