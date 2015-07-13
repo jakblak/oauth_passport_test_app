@@ -13,6 +13,9 @@
         <%}>
     </div>
     <div>
+      Last Tweet: <%=user.twitter.lastPost%>
+    </div>
+    <div>
       <ul class="social list-inline">
         <a href="/auth/google" class="<%if(user.google){%>googleplus<%}%>"><i class="fa fa-google-plus"></i></a>
         <a href="/auth/twitter" class="<%if(user.twitter){%>twitter<%}%>"><i class="fa fa-twitter"></i></a>
