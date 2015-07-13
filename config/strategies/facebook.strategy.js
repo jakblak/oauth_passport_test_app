@@ -5,8 +5,8 @@ var secrets = require('../../secrets');
 
 module.exports = function() {
   passport.use(new FacebookStrategy({
-      clientID: 'secrets.fbID',
-      clientSecret: 'secrets.fbSecret',
+      clientID: secrets.fbID,
+      clientSecret: secrets.fbSecret,
       callbackURL: 'http://localhost:3000/auth/facebook/callback',
       passReqToCallback: true
     },
