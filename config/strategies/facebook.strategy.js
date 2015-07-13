@@ -45,6 +45,7 @@ module.exports = function() {
           if (user) {
             console.log('found');
             done(null, user);
+
           } else {
             console.log('not found');
             var user = new User;
